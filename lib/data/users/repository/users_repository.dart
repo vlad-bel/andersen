@@ -11,4 +11,8 @@ abstract class UsersRepository {
   Future<User?> getUser({
     required int userId,
   });
+
+  Future<User?> getUserByEmail({
+    required String email,
+  });
 }

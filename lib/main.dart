@@ -2,6 +2,7 @@ import 'package:andersen_test1/config/colors.dart';
 import 'package:andersen_test1/config/styles.dart';
 import 'package:andersen_test1/flows/auth/signin/bloc/signin_cubit.dart';
 import 'package:andersen_test1/flows/auth/signup/bloc/signup_cubit.dart';
+import 'package:andersen_test1/service/app_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
@@ -16,7 +17,7 @@ void main() async {
 
   // await TokenManager.removeTokenData();
 
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatefulWidget {
@@ -43,6 +44,9 @@ class _AppState extends State<App> {
         BlocProvider<SigninCubit>(
           create: (_) => GetIt.instance.get<SigninCubit>(),
         ),
+        // BlocProvider<SigninCubit>(
+        //   create: (_) => GetIt.instance.get<SigninCubit>(),
+        // ),
       ],
       child: BlocBuilder<AppStateCubit, AppState>(
         bloc: appStateCubit,
@@ -58,6 +62,7 @@ class _AppState extends State<App> {
                 DeviceType deviceType,
               ) {
                 return MaterialApp.router(
+                  scaffoldMessengerKey: snackbarKey,
                   title: 'Andersen Test',
                   debugShowCheckedModeBanner: false,
                   routeInformationParser: const RoutemasterParser(),

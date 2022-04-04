@@ -55,6 +55,7 @@ class AppColors {
   static const orange = const Color(0xFFFBC24A);
   static const tangerine = const Color(0xFFED8B00);
   static const red = const Color(0xFFDD0B25);
+  static const darkRed = const Color(0xFFA30013);
   static const blue = const Color(0xFF2268B4);
   static const viking = const Color(0xFF3CA5C6);
   static const shamrock = const Color(0xFF3CC6AD);

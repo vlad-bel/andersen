@@ -84,13 +84,10 @@ class _SigninFormState extends State<SigninForm> {
                 },
               ),
               TextButton(
-                onPressed: () {
-                  Routemaster.of(context).push(
+                onPressed: () async {
+                  final creds = Routemaster.of(context).push(
                     SignupPage.path,
-                    // queryParameters: {},
                   );
-                  BlocProvider.of<AppStateCubit>(context)
-                      .emit(UnauthorizedState());
                 },
                 child: Text(
                   AppString.signup,

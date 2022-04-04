@@ -62,4 +62,27 @@ class DbUserRepository implements UsersRepository {
       throw AppError(error: "error getUser($userId) => $e");
     }
   }
+
+  @override
+  Future<User?> getUserByEmail({
+    required String email,
+  }) async {
+    try {
+      var user = await (database.select(database.dBUser)
+            ..where((tbl) => tbl.email.equals(email)))
+          .getSingleOrNull();
+
+      if (user != null) {
+        return User(
+          id: user.id,
+          email: user.email,
+          registerTime: user.registerTime,
+        );
+      }
+
+      return null;
+    } catch (e) {
+      throw AppError(error: "error getUser($email) => $e");
+    }
+  }
 }
