@@ -30,6 +30,7 @@ class _SignupFormState extends State<SignupForm> {
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: BlocBuilder<SignupCubit, SignupState>(
           builder: (context, state) {
+            final cubit = BlocProvider.of<SignupCubit>(context);
             return ReactiveForm(
               formGroup: BlocProvider.of<SignupCubit>(context).fbGroup,
               child: Column(
@@ -76,7 +77,18 @@ class _SignupFormState extends State<SignupForm> {
                           'signup formgroup:${formGroup.value}, valid:${formGroup.valid} ');
                       return AppGradientButton(
                         title: AppString.signup,
-                        onPressed: () {},
+                        onPressed: () async {
+                          await cubit.signup(
+                            group: formGroup,
+                            registerSuccess: () {
+                              Navigator.of(context).pop();
+                            },
+                          );
+                          // cubit.appNotifier.showMessage(
+                          //   message: "ass",
+                          //   notifyState: NotifyState.success,
+                          // );
+                        },
                         state: formGroup.valid == true
                             ? AppButtonState.normal
                             : AppButtonState.unavailable,

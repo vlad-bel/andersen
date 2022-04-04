@@ -12,7 +12,7 @@ class DefaultUsersInteractor implements UsersInteractor {
   });
 
   @override
-  Future<void> createUser({
+  Future<User?> createUser({
     required String email,
     required String password,
     required DateTime registerTime,
@@ -30,6 +30,15 @@ class DefaultUsersInteractor implements UsersInteractor {
   }) {
     return repository.getUser(
       userId: userId,
+    );
+  }
+
+  @override
+  Future<User?> getUserByEmail({
+    required String email,
+  }) {
+    return repository.getUserByEmail(
+      email: email,
     );
   }
 }

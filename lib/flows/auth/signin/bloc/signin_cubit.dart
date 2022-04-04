@@ -1,5 +1,6 @@
 import 'package:andersen_test1/data/users/interactor/users_interactor.dart';
 import 'package:andersen_test1/flows/auth/signin/sigin_form.dart';
+import 'package:andersen_test1/injectible/injectible_init.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -11,7 +12,7 @@ class SigninState {}
 class SigninCubit extends Cubit<SigninState> {
   SigninCubit() : super(SigninState());
 
-  final usersInteractor = GetIt.instance.get<UsersInteractor>;
+  // final usersInteractor = getIt.get<UsersInteractor>;
 
   final fbGroup = fb.group(
     <String, Object>{
