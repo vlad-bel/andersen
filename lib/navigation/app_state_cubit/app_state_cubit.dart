@@ -42,4 +42,8 @@ class AppStateCubit extends Cubit<AppState> {
   void goToMainFlow() async {
     emit(AuthorizedState());
   }
+
+  void logout() async {
+    emit(UnauthorizedState());
+  }
 }
