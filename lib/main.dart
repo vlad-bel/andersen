@@ -1,5 +1,6 @@
 import 'package:andersen_test1/config/colors.dart';
 import 'package:andersen_test1/config/styles.dart';
+import 'package:andersen_test1/flows/app/datalist/datalist_cubit.dart';
 import 'package:andersen_test1/flows/auth/signin/bloc/signin_cubit.dart';
 import 'package:andersen_test1/flows/auth/signup/bloc/signup_cubit.dart';
 import 'package:andersen_test1/service/app_notifier.dart';
@@ -43,6 +44,9 @@ class _AppState extends State<App> {
         ),
         BlocProvider<SigninCubit>(
           create: (_) => GetIt.instance.get<SigninCubit>(),
+        ),
+        BlocProvider<DataListCubit>(
+          create: (_) => GetIt.instance.get<DataListCubit>(),
         ),
         // BlocProvider<SigninCubit>(
         //   create: (_) => GetIt.instance.get<SigninCubit>(),

@@ -7,4 +7,6 @@ class Resources {
 
   static const eyeIcon = '$_pathToIcons/eye_icon.svg';
   static const eyeCrossedIcon = '$_pathToIcons/eye_crossed_icon.svg';
+
+  static const addProjBackground = '$_pathToImages/tab_background.png';
 }

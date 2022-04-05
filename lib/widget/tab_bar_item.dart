@@ -1,4 +1,5 @@
 import 'package:andersen_test1/config/colors.dart';
+import 'package:andersen_test1/config/resources.dart';
 import 'package:andersen_test1/config/styles.dart';
 import 'package:andersen_test1/widget/tab_item.dart';
 import 'package:flutter/material.dart';
@@ -37,14 +38,13 @@ class TabBarItem extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 tabItem.iconPath,
-                color: AppColors.green,
+                color: _color,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),
               Text(
                 tabItem.title,
                 textAlign: TextAlign.center,
-                style: AppTextStyles.robotoRegular12
-                    .copyWith(color: AppColors.green),
+                style: AppTextStyles.robotoRegular12.copyWith(color: _color),
               )
             ],
           ),
@@ -53,16 +53,21 @@ class TabBarItem extends StatelessWidget {
     );
   }
 
-  /// Decoration for [TabItem.addProject]
+  Color get _color {
+    if (tabPage.controller.index != tabItem.index) {
+      return AppColors.white.withOpacity(0.5);
+    }
+
+    return Colors.white;
+  }
+
   BoxDecoration get _decoration {
     return BoxDecoration(
-      // image: DecorationImage(
-      //   image: AssetImage(
-      //     // Need to use background from assets, as its border with gradient,
-      //     // and it is not possible to make with flutter tools
-      //     Resources.addProjBackground,
-      //   ),
-      // ),
+      image: const DecorationImage(
+        image: AssetImage(
+          Resources.addProjBackground,
+        ),
+      ),
       borderRadius: const BorderRadius.all(Radius.circular(16)),
       boxShadow: [
         BoxShadow(
