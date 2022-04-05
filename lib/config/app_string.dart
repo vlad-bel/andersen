@@ -12,4 +12,10 @@ class AppString {
 
   static const signup = 'Sign up';
   static const signin = 'Sign in';
+  static const welcome = 'Welcome, ';
+
+  static const wrongPassword = 'Wrong password';
+  static const userNotExists = 'User not exists';
+  static const userExists = 'Email already exists!';
+  static const emailRegistered = 'Email registered!';
 }

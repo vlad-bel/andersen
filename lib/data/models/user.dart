@@ -1,7 +1,5 @@
 import 'dart:convert' as dartConvert;
 
-import 'package:drift/drift.dart';
-
 String encodeUserToString(User user) => dartConvert.json.encode(user.toMap());
 
 class User {

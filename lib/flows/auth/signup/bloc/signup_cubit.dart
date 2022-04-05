@@ -1,3 +1,5 @@
+import 'package:andersen_test1/config/app_string.dart';
+import 'package:andersen_test1/data/models/app_error.dart';
 import 'package:andersen_test1/data/users/interactor/users_interactor.dart';
 import 'package:andersen_test1/flows/auth/signin/bloc/signin_cubit.dart';
 import 'package:andersen_test1/flows/auth/signin/sigin_form.dart';
@@ -57,7 +59,10 @@ class SignupCubit extends Cubit<SignupState> {
           registerTime: DateTime.now(),
         );
 
-        showMessage(message: 'Email registered!', type: NotifyType.success);
+        showMessage(
+          message: AppString.emailRegistered,
+          type: NotifyType.success,
+        );
 
         fbGroup.value = {
           SignupForm.emailFormControlName: "",
@@ -72,14 +77,14 @@ class SignupCubit extends Cubit<SignupState> {
         return;
       }
 
-      print("User already exist $user");
-      showMessage(message: "User already exist", type: NotifyType.error);
-
+      showMessage(
+        message: AppString.userExists,
+        type: NotifyType.error,
+      );
       // add already exist error
-    } catch (e) {
+    } on AppError catch (e) {
       //add creation error
-      print("Error of creating user $e");
-      showMessage(message: "Error of creating user", type: NotifyType.error);
+      showMessage(message: e.error, type: NotifyType.error);
     }
   }
 }
