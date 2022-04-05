@@ -27,7 +27,6 @@ class UserDetailsCubit extends Cubit<UserDetailsState> {
 
   void init() async {
     var user = await usersManager.getUser();
-    print("my user: ${user}");
     emit(UserDetailsState(user: user));
   }
 

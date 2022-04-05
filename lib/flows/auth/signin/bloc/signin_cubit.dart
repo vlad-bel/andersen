@@ -52,10 +52,10 @@ class SigninCubit extends Cubit<SigninState> {
         if (user.password == passHash) {
           userManager.setUser(user);
 
-          showMessage(
-            message: "${AppString.welcome} ${user.email}",
-            type: NotifyType.success,
-          );
+          // showMessage(
+          //   message: "${AppString.welcome} ${user.email}",
+          //   type: NotifyType.success,
+          // );
 
           signin();
 
