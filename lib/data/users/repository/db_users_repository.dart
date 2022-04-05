@@ -19,10 +19,17 @@ class DbUserRepository implements UsersRepository {
     required DateTime registerTime,
   }) async {
     try {
+      // var bytes = utf8.encode(password); // data being hashed
+      // var digest = sha1.convert(bytes).bytes.toString();
+      //
+      // for (var table in database.allTables) {
+      //   await database.delete(table).go();
+      // }
+
       final dbUser = DBUserCompanion(
         email: Value(email),
         registerTime: Value(registerTime),
-        password: Value(utf8.encode(password).join()),
+        password: Value(password.hashCode.toString()),
       );
 
       var user = await (database.select(database.dBUser)
@@ -30,13 +37,21 @@ class DbUserRepository implements UsersRepository {
           .getSingleOrNull();
 
       if (user == null) {
-        database.into(database.dBUser).insert(dbUser);
-        return const User();
+        await database.into(database.dBUser).insert(dbUser);
+
+        final test = await getUserByEmail(email: email);
+        print(test);
+        return User(
+          email: email,
+          password: password.hashCode.toString(),
+          registerTime: registerTime,
+        );
       }
 
       throw AppError(error: "user $email already exist");
     } catch (e) {
-      throw AppError(error: "error createUser($email, $registerTime) => $e");
+      throw AppError(
+          error: "error createUser($email, $password, $registerTime) => $e");
     }
   }
 
@@ -76,6 +91,7 @@ class DbUserRepository implements UsersRepository {
         return User(
           id: user.id,
           email: user.email,
+          password: user.password,
           registerTime: user.registerTime,
         );
       }

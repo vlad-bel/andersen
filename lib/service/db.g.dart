@@ -194,15 +194,15 @@ class $DBUserTable extends DBUser with TableInfo<$DBUserTable, DBUserData> {
   late final GeneratedColumn<String?> email = GeneratedColumn<String?>(
       'email', aliasedName, false,
       additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 6, maxTextLength: 32),
+          GeneratedColumn.checkTextLength(minTextLength: 6, maxTextLength: 100),
       type: const StringType(),
       requiredDuringInsert: true);
   final VerificationMeta _passwordMeta = const VerificationMeta('password');
   @override
   late final GeneratedColumn<String?> password = GeneratedColumn<String?>(
       'password', aliasedName, false,
-      additionalChecks: GeneratedColumn.checkTextLength(
-          minTextLength: 8, maxTextLength: 1024),
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 100),
       type: const StringType(),
       requiredDuringInsert: true);
   final VerificationMeta _registerTimeMeta =

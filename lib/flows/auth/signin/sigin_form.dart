@@ -28,6 +28,8 @@ class SigninForm extends StatefulWidget {
 class _SigninFormState extends State<SigninForm> {
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<SigninCubit>(context);
+
     return Scaffold(
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -76,7 +78,16 @@ class _SigninFormState extends State<SigninForm> {
                       'signin formgroup:${formGroup.value}, valid:${formGroup.valid} ');
                   return AppGradientButton(
                     title: AppString.signin,
-                    onPressed: () {},
+                    onPressed: () {
+                      cubit.signin(
+                        cubit.fbGroup,
+                        () {
+                          final appCubit =
+                              BlocProvider.of<AppStateCubit>(context);
+                          appCubit.goToMainFlow();
+                        },
+                      );
+                    },
                     state: formGroup.valid == true
                         ? AppButtonState.normal
                         : AppButtonState.unavailable,
@@ -85,7 +96,7 @@ class _SigninFormState extends State<SigninForm> {
               ),
               TextButton(
                 onPressed: () async {
-                  final creds = Routemaster.of(context).push(
+                  Routemaster.of(context).push(
                     SignupPage.path,
                   );
                 },

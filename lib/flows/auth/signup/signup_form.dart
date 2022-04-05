@@ -73,8 +73,6 @@ class _SignupFormState extends State<SignupForm> {
                       FormGroup formGroup,
                       Widget? child,
                     ) {
-                      print(
-                          'signup formgroup:${formGroup.value}, valid:${formGroup.valid} ');
                       return AppGradientButton(
                         title: AppString.signup,
                         onPressed: () async {
@@ -84,10 +82,6 @@ class _SignupFormState extends State<SignupForm> {
                               Navigator.of(context).pop();
                             },
                           );
-                          // cubit.appNotifier.showMessage(
-                          //   message: "ass",
-                          //   notifyState: NotifyState.success,
-                          // );
                         },
                         state: formGroup.valid == true
                             ? AppButtonState.normal
