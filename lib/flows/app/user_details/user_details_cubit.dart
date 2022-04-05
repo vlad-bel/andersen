@@ -4,12 +4,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:get_it/get_it.dart';
 
 class UserDetailsState extends Equatable {
   final User? user;
 
-  UserDetailsState({
+  const UserDetailsState({
     this.user,
   });
 
@@ -19,11 +18,13 @@ class UserDetailsState extends Equatable {
 
 @singleton
 class UserDetailsCubit extends Cubit<UserDetailsState> {
-  UserDetailsCubit() : super(UserDetailsState(user: usersManager.user)) {
+  UserDetailsCubit({
+    required this.usersManager,
+  }) : super(UserDetailsState(user: usersManager.user)) {
     init();
   }
 
-  static final usersManager = GetIt.instance.get<UserManager>();
+  final UserManager usersManager;
 
   void init() async {
     var user = await usersManager.getUser();

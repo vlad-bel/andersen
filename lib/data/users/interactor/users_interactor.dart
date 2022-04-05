@@ -1,5 +1,3 @@
-import 'package:injectable/injectable.dart';
-
 import '../../models/user.dart';
 
 abstract class UsersInteractor {

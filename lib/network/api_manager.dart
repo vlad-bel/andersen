@@ -1,6 +1,5 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 /// LOGS
@@ -47,8 +46,8 @@ class ApiManager {
     CancelToken? cancelToken,
   }) async {
     try {
-      print('path $path');
-      print('queryParameters $queryParameters');
+      debugPrint('path $path');
+      debugPrint('queryParameters $queryParameters');
 
       Response response = await _dio.get(
         path,
@@ -57,7 +56,7 @@ class ApiManager {
         cancelToken: cancelToken,
       );
 
-      print('realUri ${response.realUri}');
+      debugPrint('realUri ${response.realUri}');
       return response;
     } on DioError catch (error) {
       return Future.value(error.response);
@@ -71,8 +70,8 @@ class ApiManager {
     Options? options,
     CancelToken? cancelToken,
   }) async {
-    print('path - $path');
-    print('data - $data');
+    debugPrint('path - $path');
+    debugPrint('data - $data');
 
     try {
       Response response = await _dio.post(
@@ -115,7 +114,7 @@ class ApiManager {
     Options? options,
     CancelToken? cancelToken,
   }) async {
-    print('path $path');
+    debugPrint('path $path');
 
     try {
       Response response = await _dio.put(
@@ -125,7 +124,7 @@ class ApiManager {
         cancelToken: cancelToken,
       );
 
-      print('realUri ${response.realUri}');
+      debugPrint('realUri ${response.realUri}');
 
       return response;
     } on DioError catch (error) {
@@ -140,7 +139,7 @@ class ApiManager {
     Options? options,
     CancelToken? cancelToken,
   }) async {
-    print('path $path');
+    debugPrint('path $path');
 
     try {
       Response response = await _dio.delete(
@@ -150,8 +149,8 @@ class ApiManager {
         cancelToken: cancelToken,
       );
 
-      print('realUri ${response.realUri}');
-      print('response $response');
+      debugPrint('realUri ${response.realUri}');
+      debugPrint('response $response');
 
       return response;
     } on DioError catch (error) {
@@ -187,12 +186,6 @@ class ApiManager {
         'Accept': 'application/json',
         'X-Requested-With': 'XMLHttpRequest'
       };
-      // String? token = await TokenManager.getAccesToken();
-      //
-      // print("token: $token");
-      // if (token != null) {
-      //   headers['Authorization'] = "Token " + token;
-      // }
 
       options = Options(
         method: method,
@@ -232,89 +225,4 @@ class ApiManager {
     };
     return option;
   }
-
-// void _refreshToken(
-//   DioError error,
-//   ErrorInterceptorHandler handler,
-// ) async {
-//   final path = error.requestOptions.path.split('/').last;
-//
-//   if (error.response?.statusCode == 401 &&
-//       path != 'login' &&
-//       path != 'register') {
-//     _dio.lock();
-//     _dio.interceptors.requestLock.lock();
-//     _dio.interceptors.responseLock.lock();
-//     _dio.interceptors.errorLock.lock();
-//
-//     RequestOptions opts = error.requestOptions;
-//
-//     // final accessToken = await TokenManager.getAccesToken();
-//     // final canRefreshToken = await TokenManager.canTokenRefresh();
-//     //
-//     // if (!canRefreshToken) {
-//     //   _dio.unlock();
-//     //   _dio.interceptors.requestLock.unlock();
-//     //   _dio.interceptors.responseLock.unlock();
-//     //   _dio.interceptors.errorLock.clear();
-//     //   _dio.interceptors.errorLock.unlock();
-//     //
-//     //   return handler.next(error);
-//     // }
-//
-//     final refreshToken = await TokenManager.getRefreshToken();
-//
-//     if (refreshToken != null) {
-//       http.Response response = await http.post(
-//         Uri.parse(AppConfig.API_URI + '/api/oauth/refresh-token'),
-//         headers: {
-//           "Accept": "application/json",
-//           "Content-Type": "application/x-www-form-urlencoded",
-//         },
-//         body: {
-//           'refresh_token': refreshToken,
-//         },
-//         // encoding: Encoding.getByName("utf-8"),
-//       );
-//
-//       final body = jsonDecode(response.body) as Map<String, dynamic>;
-//
-//       if (body['code'] >= 200 && body['code'] <= 300) {
-//         final newTokenExpires = body['expires_in'];
-//
-//         final newAccessToken = body['access_token'];
-//         final newRefreshToken = body['refresh_token'];
-//
-//         await TokenManager.setTokenExpire(newTokenExpires!);
-//         await TokenManager.setAccessToken(
-//           newAccessToken,
-//           TokenType.user,
-//         );
-//         await TokenManager.setRefreshToken(newRefreshToken!);
-//
-//         opts.headers["Authorization"] = "Token " + newAccessToken!;
-//
-//         return handler.next(error);
-//       }
-//
-//       if (body['code'] >= 400 && body['code'] <= 500) {
-//         _dio.clear();
-//         _dio.unlock();
-//         _dio.interceptors.requestLock.clear();
-//         _dio.interceptors.responseLock.clear();
-//         _dio.interceptors.errorLock.clear();
-//         _dio.interceptors.requestLock.unlock();
-//         _dio.interceptors.responseLock.unlock();
-//         _dio.interceptors.errorLock.unlock();
-//
-//         await TokenManager.removeTokenData();
-//         // TODO logout user
-//
-//         // print("interceptor error: $error");
-//       }
-//     }
-//   }
-//
-//   return handler.next(error);
-// }
 }

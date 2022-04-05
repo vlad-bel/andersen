@@ -1,7 +1,6 @@
 import 'package:andersen_test1/config/app_string.dart';
 import 'package:andersen_test1/config/colors.dart';
 import 'package:andersen_test1/config/styles.dart';
-import 'package:andersen_test1/flows/auth/signin/bloc/signin_cubit.dart';
 import 'package:andersen_test1/flows/auth/signin/signin_page.dart';
 import 'package:andersen_test1/flows/auth/signup/bloc/signup_cubit.dart';
 import 'package:andersen_test1/widget/app_gradient_button.dart';

@@ -8,16 +8,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:get_it/get_it.dart';
 
 class SigninState {}
 
 @singleton
 class SigninCubit extends Cubit<SigninState> {
-  SigninCubit() : super(SigninState());
+  SigninCubit({
+    required this.usersInteractor,
+    required this.userManager,
+  }) : super(SigninState());
 
-  final usersInteractor = GetIt.instance.get<UsersInteractor>();
-  final userManager = GetIt.instance.get<UserManager>();
+  final UsersInteractor usersInteractor;
+  final UserManager userManager;
 
   final fbGroup = fb.group(
     <String, Object>{
@@ -51,11 +53,6 @@ class SigninCubit extends Cubit<SigninState> {
         final passHash = password.hashCode.toString();
         if (user.password == passHash) {
           userManager.setUser(user);
-
-          // showMessage(
-          //   message: "${AppString.welcome} ${user.email}",
-          //   type: NotifyType.success,
-          // );
 
           signin();
 

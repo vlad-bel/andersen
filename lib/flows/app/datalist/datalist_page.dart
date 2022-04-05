@@ -72,7 +72,7 @@ class _DataListState extends State<DataList> {
             },
             color: AppColors.green,
             child: ListView.builder(
-              physics: BouncingScrollPhysics(
+              physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics()),
               controller: scrollController,
               itemCount: currState.pagination ? itemCount + 1 : itemCount,

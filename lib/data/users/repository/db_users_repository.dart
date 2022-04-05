@@ -1,16 +1,15 @@
-import 'dart:convert';
-
 import 'package:andersen_test1/data/models/app_error.dart';
 import 'package:andersen_test1/data/models/user.dart';
 import 'package:andersen_test1/data/users/repository/users_repository.dart';
 import 'package:andersen_test1/service/db.dart';
 import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
-import 'package:get_it/get_it.dart';
 
 @Singleton(as: UsersRepository)
 class DbUserRepository implements UsersRepository {
-  final MyDatabase database = GetIt.instance.get<MyDatabase>();
+  final MyDatabase database;
+
+  DbUserRepository({required this.database});
 
   @override
   Future<User?> createUser({
@@ -19,13 +18,6 @@ class DbUserRepository implements UsersRepository {
     required DateTime registerTime,
   }) async {
     try {
-      // var bytes = utf8.encode(password); // data being hashed
-      // var digest = sha1.convert(bytes).bytes.toString();
-      //
-      // for (var table in database.allTables) {
-      //   await database.delete(table).go();
-      // }
-
       final dbUser = DBUserCompanion(
         email: Value(email),
         registerTime: Value(registerTime),
@@ -40,7 +32,6 @@ class DbUserRepository implements UsersRepository {
         await database.into(database.dBUser).insert(dbUser);
 
         final test = await getUserByEmail(email: email);
-        print(test);
         return User(
           email: email,
           password: password.hashCode.toString(),

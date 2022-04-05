@@ -1,5 +1,4 @@
 import 'package:andersen_test1/data/models/user.dart';
-import 'package:injectable/injectable.dart';
 
 abstract class UsersRepository {
   Future<User?> createUser({
