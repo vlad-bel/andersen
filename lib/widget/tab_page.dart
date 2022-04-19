@@ -1,7 +1,5 @@
 import 'package:andersen_test1/widget/custom_bottom_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:routemaster/routemaster.dart';
 
 class TabBarPage extends StatelessWidget {

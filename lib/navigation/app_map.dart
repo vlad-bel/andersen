@@ -32,8 +32,8 @@ class AppRouteMap extends RouteMap {
               "/user_details",
             ],
           ),
-      "/data_list": (_) => const MaterialPage(child: const DataList()),
-      "/user_details": (_) => const MaterialPage(child: const UserDetails()),
+      "/data_list": (_) => const MaterialPage(child: DataList()),
+      "/user_details": (_) => const MaterialPage(child: UserDetails()),
     };
   }
 }

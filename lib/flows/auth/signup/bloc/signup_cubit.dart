@@ -10,17 +10,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:get_it/get_it.dart';
 
 class SignupState {}
 
 @singleton
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit() : super(SignupState());
+  SignupCubit({
+    required this.usersInteractor,
+    required this.userManager,
+    required this.signinCubit,
+  }) : super(SignupState());
 
-  final usersInteractor = GetIt.instance.get<UsersInteractor>();
-  final userManager = GetIt.instance.get<UserManager>();
-  final signinCubit = GetIt.instance.get<SigninCubit>();
+  final UsersInteractor usersInteractor;
+  final UserManager userManager;
+  final SigninCubit signinCubit;
 
   final fbGroup = fb.group(
     <String, Object>{

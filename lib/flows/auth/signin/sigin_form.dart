@@ -1,10 +1,8 @@
 import 'package:andersen_test1/config/app_string.dart';
 import 'package:andersen_test1/config/colors.dart';
 import 'package:andersen_test1/config/styles.dart';
+import 'package:andersen_test1/flows/app/user_details/user_details_cubit.dart';
 import 'package:andersen_test1/flows/auth/signin/bloc/signin_cubit.dart';
-import 'package:andersen_test1/flows/auth/signin/signin_page.dart';
-import 'package:andersen_test1/flows/auth/signup/bloc/signup_cubit.dart';
-import 'package:andersen_test1/flows/auth/signup/signup_form.dart';
 import 'package:andersen_test1/flows/auth/signup/signup_page.dart';
 import 'package:andersen_test1/navigation/app_state_cubit/app_state_cubit.dart';
 import 'package:andersen_test1/widget/app_gradient_button.dart';
@@ -74,8 +72,6 @@ class _SigninFormState extends State<SigninForm> {
                   FormGroup formGroup,
                   Widget? child,
                 ) {
-                  print(
-                      'signin formgroup:${formGroup.value}, valid:${formGroup.valid} ');
                   return AppGradientButton(
                     title: AppString.signin,
                     onPressed: () {
@@ -85,6 +81,9 @@ class _SigninFormState extends State<SigninForm> {
                           final appCubit =
                               BlocProvider.of<AppStateCubit>(context);
                           appCubit.goToMainFlow();
+                          final userDetailsCubit =
+                              BlocProvider.of<UserDetailsCubit>(context);
+                          userDetailsCubit.init();
                         },
                       );
                     },

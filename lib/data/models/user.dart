@@ -1,6 +1,6 @@
-import 'dart:convert' as dartConvert;
+import 'dart:convert' as dart_convert;
 
-String encodeUserToString(User user) => dartConvert.json.encode(user.toMap());
+String encodeUserToString(User user) => dart_convert.json.encode(user.toMap());
 
 class User {
   const User({

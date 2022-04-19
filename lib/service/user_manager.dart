@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:andersen_test1/data/models/user.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,8 +9,7 @@ class UserManager {
   User? user;
 
   Future<void> init() async {
-    this.user = await getUser();
-    print("UserManager user: ${this.user}");
+    user = await getUser();
   }
 
   static const _userKey = 'user';
@@ -24,10 +24,10 @@ class UserManager {
         _userKey,
         encodedUser,
       );
-      print('user is saved ${isSaved ? "successfully" : "not successfully"}');
+      debugPrint('user is saved ${isSaved ? "successfully" : "not successfully"}');
       return;
     } catch (_) {
-      print('encoding_user_to_string_is_failed');
+      debugPrint('encoding_user_to_string_is_failed');
     }
   }
 
@@ -39,10 +39,10 @@ class UserManager {
       try {
         final user = User.fromMap(jsonDecode(userJson));
 
-        print("saved_used: $user");
+        debugPrint("saved_used: $user");
         return user;
       } catch (_) {
-        print('decoding_string_to_user_is_failed');
+        debugPrint('decoding_string_to_user_is_failed');
       }
     }
 
